@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-ivory: #F6F2EA;
+  --color-sandstone: #EBE4D6;
+  --color-alabaster: #DFD6C5;
+  --color-charcoal: #1C1917;
+  --color-obsidian: #131110;
+  --color-terracotta: #A85338;
+  --color-terracotta-dark: #8A4028;
+  --color-bronze: #8E785F;
+  --color-stone-muted: #5C544B;
+}
+
+/* Minimal required third-party Lenis smooth scroll base rules */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
