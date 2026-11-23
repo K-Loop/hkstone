@@ -1,21 +1,19 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { FiArrowUp } from 'react-icons/fi';
 
 export default function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
+  const [progress, setProgress] = useState(0);
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowTopBtn(window.scrollY > 700);
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+      setProgress(pct);
+      setShowTopBtn(scrollTop > 800);
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -26,29 +24,26 @@ export default function ScrollProgress() {
 
   return (
     <>
-      {/* Top thin architectural progress bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#A85338] origin-left z-[70]"
-        style={{ scaleX }}
+      <div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-white/5 z-[70] pointer-events-none"
         aria-hidden="true"
-      />
+      >
+        <div
+          className="h-full bg-[#D4AF37] origin-left transition-transform duration-150 ease-out"
+          style={{ transform: `scaleX(${progress})` }}
+        />
+      </div>
 
-      {/* Floating Back to Top Button */}
-      <AnimatePresence>
-        {showTopBtn && (
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.35 }}
-            onClick={scrollToTop}
-            aria-label="Scroll back to top"
-            className="fixed bottom-8 right-6 md:right-10 z-50 w-12 h-12 bg-[#1C1917] text-[#F6F2EA] border border-[#8E785F]/40 flex items-center justify-center hover:bg-[#A85338] hover:border-[#A85338] transition-colors duration-300 shadow-lg cursor-pointer"
-          >
-            <FiArrowUp className="w-5 h-5" />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      <button
+        type="button"
+        onClick={scrollToTop}
+        aria-label="Scroll back to top"
+        className={`fixed bottom-8 right-6 md:right-10 z-50 w-12 h-12 rounded-full bg-[#141210]/90 backdrop-blur-md text-[#F4EFE6] border border-[#D4AF37]/40 flex items-center justify-center hover:bg-[#D4AF37] hover:text-[#0B0A09] transition-all duration-300 cursor-pointer ${
+          showTopBtn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 pointer-events-none'
+        }`}
+      >
+        <FiArrowUp className="w-5 h-5" />
+      </button>
     </>
   );
 }

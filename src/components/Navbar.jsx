@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa';
 import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi';
 
@@ -19,14 +18,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 40);
 
       const sections = navLinks.map((l) => l.href.replace('#', ''));
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 180) {
+          if (rect.top <= 240) {
             setActiveSection(sections[i]);
             break;
           }
@@ -51,39 +50,38 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[#F6F2EA]/95 backdrop-blur-md border-b border-[#1C1917]/10 py-3.5 shadow-[0_4px_30px_rgba(28,25,23,0.04)]'
-          : 'bg-[#F6F2EA]/80 backdrop-blur-sm py-5 border-b border-[#1C1917]/10'
+          ? 'bg-[#0B0A09]/90 backdrop-blur-xl border-b border-white/10 py-3.5'
+          : 'bg-gradient-to-b from-[#0B0A09]/90 via-[#0B0A09]/40 to-transparent py-6'
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 xl:px-14 flex items-center justify-between gap-4">
-        {/* Official Brand Logo + Single-Line Title */}
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 xl:px-16 flex items-center justify-between gap-4">
+        {/* LEFT: Official Logo + Brand Name */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
           className="group flex items-center gap-3.5 shrink-0 focus:outline-none"
-          aria-label="HK Stone Sculpture Home"
         >
-          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#A85338]/60 shadow-sm shrink-0 bg-[#8A1C14] flex items-center justify-center group-hover:border-[#A85338] transition-all duration-300">
+          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-[#D4AF37]/70 bg-[#141210] shrink-0 p-[1px] transition-transform duration-500 group-hover:scale-105">
             <img
               src="/images/hk-logo.jpg"
-              alt="Hari Krishnan Stone Sculptures Official Logo"
-              className="w-full h-full object-cover object-top scale-[1.15]"
+              alt="HK Stone Sculpture Official Logo"
+              className="w-full h-full rounded-full object-cover object-top scale-[1.12]"
             />
           </div>
-          <div className="flex flex-col justify-center">
-            <span className="font-serif text-lg sm:text-xl xl:text-[22px] tracking-[0.1em] uppercase font-semibold text-[#1C1917] leading-tight whitespace-nowrap">
+          <div className="flex flex-col">
+            <span className="font-serif text-lg sm:text-xl tracking-[0.16em] uppercase font-medium text-[#F4EFE6] leading-none whitespace-nowrap">
               HK Stone Sculpture
             </span>
-            <span className="text-[9.5px] uppercase tracking-[0.22em] text-[#A85338] font-medium whitespace-nowrap">
+            <span className="text-[9.5px] uppercase tracking-[0.24em] text-[#D4AF37] mt-1.5 whitespace-nowrap">
               Hari Krishnan Stone Sculptures
             </span>
           </div>
         </a>
 
-        {/* Desktop Navigation — Strictly Single-Line (`whitespace-nowrap`) & Centered */}
+        {/* CENTER: Minimal Gallery Navigation */}
         <nav
-          className="hidden lg:flex items-center justify-center gap-6 xl:gap-8"
-          aria-label="Main Navigation"
+          className="hidden lg:flex items-center justify-center gap-8 xl:gap-10"
+          aria-label="Primary Navigation"
         >
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace('#', '');
@@ -92,15 +90,15 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative text-[11px] xl:text-xs uppercase tracking-[0.18em] py-1.5 whitespace-nowrap transition-colors duration-300 ${
+                className={`relative text-[11px] uppercase tracking-[0.24em] py-1.5 whitespace-nowrap transition-colors duration-300 ${
                   isActive
-                    ? 'text-[#A85338] font-semibold'
-                    : 'text-[#1C1917]/80 hover:text-[#1C1917]'
+                    ? 'text-[#D4AF37] font-medium'
+                    : 'text-[#F4EFE6]/70 hover:text-[#F4EFE6]'
                 }`}
               >
                 {link.name}
                 <span
-                  className={`absolute bottom-0 left-0 h-[1.5px] bg-[#A85338] transition-all duration-300 ${
+                  className={`absolute bottom-0 left-0 h-[1px] bg-[#D4AF37] transition-all duration-300 ${
                     isActive ? 'w-full' : 'w-0 hover:w-full'
                   }`}
                 />
@@ -109,72 +107,58 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Desktop WhatsApp CTA — Strictly Single-Line (`whitespace-nowrap`) */}
+        {/* RIGHT: Gold-Trimmed WhatsApp CTA */}
         <div className="hidden lg:flex items-center shrink-0">
           <a
-            href="https://wa.me/918940705654?text=Hello%20HK%20Stone%20Sculpture%2C%20I%20would%20like%20to%20enquire%20about%20a%20stone%20sculpture."
+            href="https://wa.me/918940705654?text=Hello%20HK%20Stone%20Sculpture%2C%20I%20would%20like%20to%20enquire%20about%20a%20sculpture."
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center justify-center gap-2.5 px-5 xl:px-6 py-3 border border-[#1C1917] bg-[#1C1917] text-[#F6F2EA] text-[11px] uppercase tracking-[0.18em] whitespace-nowrap transition-all duration-300 hover:bg-[#A85338] hover:border-[#A85338]"
+            className="group inline-flex items-center gap-2.5 px-6 py-3 border border-[#D4AF37]/60 bg-[#D4AF37]/10 text-[#F4EFE6] text-[11px] uppercase tracking-[0.22em] whitespace-nowrap transition-all duration-300 hover:bg-[#D4AF37] hover:text-[#0B0A09]"
           >
-            <FaWhatsapp className="w-4 h-4 text-[#F6F2EA] shrink-0 transition-transform duration-300 group-hover:scale-110" />
+            <FaWhatsapp className="w-3.5 h-3.5 text-[#D4AF37] group-hover:text-[#0B0A09] transition-colors shrink-0" />
             <span>WhatsApp Enquiry</span>
           </a>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* MOBILE TOGGLE */}
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={mobileOpen}
-          className="lg:hidden w-11 h-11 border border-[#1C1917]/20 flex items-center justify-center text-[#1C1917] hover:border-[#A85338] hover:text-[#A85338] transition-colors cursor-pointer shrink-0"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          className="lg:hidden w-11 h-11 border border-white/20 flex items-center justify-center text-[#F4EFE6] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors cursor-pointer shrink-0"
         >
-          {mobileOpen ? <HiOutlineX className="w-6 h-6" /> : <HiOutlineMenuAlt4 className="w-6 h-6" />}
+          {mobileOpen ? <HiOutlineX className="w-5 h-5" /> : <HiOutlineMenuAlt4 className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden bg-[#F6F2EA] border-b border-[#1C1917]/15 overflow-hidden"
+      {/* MOBILE DRAWER */}
+      <div
+        className={`lg:hidden bg-[#0B0A09]/98 backdrop-blur-2xl border-b border-white/10 overflow-hidden transition-all duration-500 ${
+          mobileOpen ? 'max-h-[480px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="px-6 py-8 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="font-serif text-2xl text-[#F4EFE6] hover:text-[#D4AF37] transition-colors border-b border-white/10 pb-3"
+            >
+              {link.name}
+            </a>
+          ))}
+          <a
+            href="https://wa.me/918940705654"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 w-full py-4 bg-[#D4AF37] text-[#0B0A09] font-medium text-xs uppercase tracking-[0.22em] flex items-center justify-center gap-3"
           >
-            <div className="px-6 py-8 flex flex-col gap-5">
-              {navLinks.map((link, idx) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="font-serif text-2xl text-[#1C1917] hover:text-[#A85338] transition-colors border-b border-[#1C1917]/10 pb-3 flex items-center justify-between"
-                >
-                  <span>{link.name}</span>
-                  <span className="text-xs font-sans uppercase tracking-[0.2em] text-[#8E785F]">
-                    0{idx + 1}
-                  </span>
-                </motion.a>
-              ))}
-
-              <a
-                href="https://wa.me/918940705654?text=Hello%20HK%20Stone%20Sculpture%2C%20I%20would%20like%20to%20enquire%20about%20a%20stone%20sculpture."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 w-full py-4 bg-[#1C1917] text-[#F6F2EA] text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-[#A85338] transition-colors"
-              >
-                <FaWhatsapp className="w-4 h-4" />
-                <span>WhatsApp Enquiry</span>
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <FaWhatsapp className="w-4 h-4" />
+            <span>WhatsApp Enquiry</span>
+          </a>
+        </div>
+      </div>
     </header>
   );
 }

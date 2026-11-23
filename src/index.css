@@ -4,18 +4,13 @@
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --color-ivory: #F6F2EA;
-  --color-sandstone: #EBE4D6;
-  --color-alabaster: #DFD6C5;
-  --color-charcoal: #1C1917;
-  --color-obsidian: #131110;
-  --color-terracotta: #A85338;
-  --color-terracotta-dark: #8A4028;
-  --color-bronze: #8E785F;
-  --color-stone-muted: #5C544B;
+  --color-obsidian: #0B0A09;
+  --color-basalt: #141210;
+  --color-alabaster: #F4EFE6;
+  --color-gold: #D4AF37;
+  --color-bronze: #9A8C7E;
 }
 
-/* Minimal required third-party Lenis smooth scroll base rules */
 html.lenis,
 html.lenis body {
   height: auto;
