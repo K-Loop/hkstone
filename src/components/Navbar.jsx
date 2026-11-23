@@ -3,36 +3,19 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
+  { name: 'Gallery', href: '#creations' },
   { name: 'About', href: '#about' },
-  { name: 'Our Creations', href: '#creations' },
-  { name: 'Services', href: '#services' },
-  { name: 'Process', href: '#process' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-
-      const sections = navLinks.map((l) => l.href.replace('#', ''));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 240) {
-            setActiveSection(sections[i]);
-            break;
-          }
-        }
-      }
+      setScrolled(window.scrollY > 30);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -48,75 +31,57 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0B0A09]/90 backdrop-blur-xl border-b border-white/10 py-3.5'
-          : 'bg-gradient-to-b from-[#0B0A09]/90 via-[#0B0A09]/40 to-transparent py-6'
+          ? 'bg-[#0D0B0A]/95 backdrop-blur-md border-b border-white/10 py-3.5'
+          : 'bg-[#0D0B0A]/80 backdrop-blur-sm border-b border-white/5 py-4.5'
       }`}
     >
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 xl:px-16 flex items-center justify-between gap-4">
-        {/* LEFT: Official Logo + Brand Name */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex items-center justify-between gap-4">
+        {/* LEFT: Minimal Logo & Atelier Name */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
           className="group flex items-center gap-3.5 shrink-0 focus:outline-none"
         >
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-[#D4AF37]/70 bg-[#141210] shrink-0 p-[1px] transition-transform duration-500 group-hover:scale-105">
-            <img
-              src="/images/hk-logo.jpg"
-              alt="HK Stone Sculpture Official Logo"
-              className="w-full h-full rounded-full object-cover object-top scale-[1.12]"
-            />
-          </div>
+          <img
+            src="/images/hk-logo.jpg"
+            alt="HK Stone Sculpture Logo"
+            className="w-10 h-10 rounded-full object-cover object-top border border-[#D48C46]/70"
+          />
           <div className="flex flex-col">
-            <span className="font-serif text-lg sm:text-xl tracking-[0.16em] uppercase font-medium text-[#F4EFE6] leading-none whitespace-nowrap">
+            <span className="font-display text-base sm:text-lg tracking-[0.12em] uppercase text-[#F5F2EB] font-medium leading-none">
               HK Stone Sculpture
             </span>
-            <span className="text-[9.5px] uppercase tracking-[0.24em] text-[#D4AF37] mt-1.5 whitespace-nowrap">
-              Hari Krishnan Stone Sculptures
+            <span className="text-[9.5px] uppercase tracking-[0.22em] text-[#9E9589] mt-1">
+              Stone Sculpture Atelier
             </span>
           </div>
         </a>
 
-        {/* CENTER: Minimal Gallery Navigation */}
-        <nav
-          className="hidden lg:flex items-center justify-center gap-8 xl:gap-10"
-          aria-label="Primary Navigation"
-        >
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.href.replace('#', '');
-            return (
+        {/* RIGHT: Minimal Nav Links + WhatsApp Pill */}
+        <div className="hidden md:flex items-center gap-8">
+          <nav className="flex items-center gap-8" aria-label="Main Navigation">
+            {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative text-[11px] uppercase tracking-[0.24em] py-1.5 whitespace-nowrap transition-colors duration-300 ${
-                  isActive
-                    ? 'text-[#D4AF37] font-medium'
-                    : 'text-[#F4EFE6]/70 hover:text-[#F4EFE6]'
-                }`}
+                className="text-xs uppercase tracking-[0.2em] text-[#F5F2EB]/80 hover:text-[#D48C46] transition-colors"
               >
                 {link.name}
-                <span
-                  className={`absolute bottom-0 left-0 h-[1px] bg-[#D4AF37] transition-all duration-300 ${
-                    isActive ? 'w-full' : 'w-0 hover:w-full'
-                  }`}
-                />
               </a>
-            );
-          })}
-        </nav>
+            ))}
+          </nav>
 
-        {/* RIGHT: Gold-Trimmed WhatsApp CTA */}
-        <div className="hidden lg:flex items-center shrink-0">
           <a
-            href="https://wa.me/918940705654?text=Hello%20HK%20Stone%20Sculpture%2C%20I%20would%20like%20to%20enquire%20about%20a%20sculpture."
+            href="https://wa.me/918940705654?text=Hello%20HK%20Stone%20Sculpture%2C%20I%20would%20like%20to%20enquire%20about%20a%20stone%20sculpture."
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 border border-[#D4AF37]/60 bg-[#D4AF37]/10 text-[#F4EFE6] text-[11px] uppercase tracking-[0.22em] whitespace-nowrap transition-all duration-300 hover:bg-[#D4AF37] hover:text-[#0B0A09]"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#D48C46] text-[#0D0B0A] font-medium text-[11px] uppercase tracking-[0.14em] hover:bg-[#e09b56] transition-colors"
           >
-            <FaWhatsapp className="w-3.5 h-3.5 text-[#D4AF37] group-hover:text-[#0B0A09] transition-colors shrink-0" />
-            <span>WhatsApp Enquiry</span>
+            <FaWhatsapp className="w-3.5 h-3.5" />
+            <span>WhatsApp</span>
           </a>
         </div>
 
@@ -124,26 +89,22 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-          className="lg:hidden w-11 h-11 border border-white/20 flex items-center justify-center text-[#F4EFE6] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors cursor-pointer shrink-0"
+          aria-label="Toggle Menu"
+          className="md:hidden w-10 h-10 rounded-lg border border-white/15 flex items-center justify-center text-[#F5F2EB] cursor-pointer"
         >
           {mobileOpen ? <HiOutlineX className="w-5 h-5" /> : <HiOutlineMenuAlt4 className="w-5 h-5" />}
         </button>
       </div>
 
       {/* MOBILE DRAWER */}
-      <div
-        className={`lg:hidden bg-[#0B0A09]/98 backdrop-blur-2xl border-b border-white/10 overflow-hidden transition-all duration-500 ${
-          mobileOpen ? 'max-h-[480px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="px-6 py-8 flex flex-col gap-4">
+      {mobileOpen && (
+        <div className="md:hidden bg-[#0D0B0A] border-b border-white/10 px-6 py-6 flex flex-col gap-4">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="font-serif text-2xl text-[#F4EFE6] hover:text-[#D4AF37] transition-colors border-b border-white/10 pb-3"
+              className="text-sm uppercase tracking-[0.2em] text-[#F5F2EB] py-2 border-b border-white/5"
             >
               {link.name}
             </a>
@@ -152,13 +113,13 @@ export default function Navbar() {
             href="https://wa.me/918940705654"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 w-full py-4 bg-[#D4AF37] text-[#0B0A09] font-medium text-xs uppercase tracking-[0.22em] flex items-center justify-center gap-3"
+            className="mt-2 py-3 rounded-full bg-[#D48C46] text-[#0D0B0A] font-semibold text-xs uppercase tracking-[0.16em] flex items-center justify-center gap-2"
           >
             <FaWhatsapp className="w-4 h-4" />
             <span>WhatsApp Enquiry</span>
           </a>
         </div>
-      </div>
+      )}
     </header>
   );
 }

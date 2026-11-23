@@ -8,75 +8,58 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0B0A09] text-[#F4EFE6] py-14 border-t border-white/10">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 xl:px-16 flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer className="bg-[#0D0B0A] text-[#F5F2EB] py-10 border-t border-white/10">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
         <a
           href="#home"
           onClick={(e) => scrollTo(e, '#home')}
-          className="flex items-center gap-3.5"
+          className="flex items-center gap-3"
         >
           <img
             src="/images/hk-logo.jpg"
             alt="HK Stone Sculpture"
-            className="w-11 h-11 rounded-full object-cover object-top border border-[#D4AF37]"
+            className="w-9 h-9 rounded-full object-cover object-top border border-[#D48C46]"
           />
           <div>
-            <span className="font-serif text-lg tracking-[0.16em] uppercase text-[#F4EFE6] block leading-none">
+            <span className="font-display text-sm tracking-[0.14em] uppercase text-[#F5F2EB] block leading-none">
               HK Stone Sculpture
             </span>
-            <span className="text-[9.5px] uppercase tracking-[0.24em] text-[#D4AF37] mt-1 block">
+            <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E9589] mt-1 block">
               Hari Krishnan Stone Sculptures &bull; Perambalur
             </span>
           </div>
         </a>
 
-        <div className="flex flex-wrap items-center justify-center gap-7 text-[11px] uppercase tracking-[0.22em] text-[#9A8C7E]">
-          <a href="#home" onClick={(e) => scrollTo(e, '#home')} className="hover:text-[#D4AF37]">
-            Home
-          </a>
-          <a href="#about" onClick={(e) => scrollTo(e, '#about')} className="hover:text-[#D4AF37]">
-            Art of Stone
-          </a>
-          <a href="#services" onClick={(e) => scrollTo(e, '#services')} className="hover:text-[#D4AF37]">
-            Creations
-          </a>
-          <a href="#process" onClick={(e) => scrollTo(e, '#process')} className="hover:text-[#D4AF37]">
-            Process
-          </a>
-          <a href="#creations" onClick={(e) => scrollTo(e, '#creations')} className="hover:text-[#D4AF37]">
-            Gallery
-          </a>
-          <a href="#contact" onClick={(e) => scrollTo(e, '#contact')} className="hover:text-[#D4AF37]">
-            Contact
-          </a>
-        </div>
+        <p className="text-xs text-[#9E9589]">
+          &copy; {new Date().getFullYear()} HK Stone Sculpture. Handcrafted in Perambalur, Tamil Nadu.
+        </p>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <a
             href="https://www.youtube.com/@hkstonesculptures2504"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="YouTube"
-            className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-[#F4EFE6] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors"
+            className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#F5F2EB] hover:border-[#D48C46] hover:text-[#D48C46] transition-colors"
           >
-            <FaYoutube className="w-4 h-4" />
+            <FaYoutube className="w-3.5 h-3.5" />
           </a>
           <a
             href="https://wa.me/918940705654"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"
-            className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-[#F4EFE6] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors"
+            className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#F5F2EB] hover:border-[#D48C46] hover:text-[#D48C46] transition-colors"
           >
-            <FaWhatsapp className="w-4 h-4" />
+            <FaWhatsapp className="w-3.5 h-3.5" />
           </a>
           <a
             href="#contact"
             onClick={(e) => scrollTo(e, '#contact')}
             aria-label="Instagram"
-            className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-[#F4EFE6] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors"
+            className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#F5F2EB] hover:border-[#D48C46] hover:text-[#D48C46] transition-colors"
           >
-            <FaInstagram className="w-4 h-4" />
+            <FaInstagram className="w-3.5 h-3.5" />
           </a>
         </div>
       </div>

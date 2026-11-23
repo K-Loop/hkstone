@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+  --font-display: "Cinzel", Georgia, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --color-obsidian: #0B0A09;
-  --color-basalt: #141210;
-  --color-alabaster: #F4EFE6;
-  --color-gold: #D4AF37;
-  --color-bronze: #9A8C7E;
+  --color-obsidian: #0D0B0A;
+  --color-basalt: #161311;
+  --color-alabaster: #F5F2EB;
+  --color-bronze: #D48C46;
+  --color-muted: #9E9589;
 }
 
 html.lenis,
